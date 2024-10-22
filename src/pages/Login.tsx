@@ -1,7 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const Login = () => {
     const formik = useFormik({

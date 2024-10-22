@@ -7,11 +7,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Cart from './pages/Cart';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const queryClient = new QueryClient();
   return (
     <>
+      <Toaster />
       <QueryClientProvider client={queryClient}>
         <Router basename='/'>
           <Routes>

@@ -1,10 +1,10 @@
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Navbar from '../layouts/Navbar'
 import ProductsList from '../components/Products/ProductsList';
-import ProductSlider from '../components/Products/ProductSlider';
 import { useMutateGetCategoryResults, useMutateGetSearchResults } from '../services/apis/SearchProducts/hooks';
 import CategoryFilter from '../components/Filters/CategoryFilter';
 import { CircularProgress } from '@mui/material';
+import { debounce } from 'lodash';
 
 const Home = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -14,22 +14,28 @@ const Home = () => {
         setSearchTerm(e.target.value);
     };
 
+    // This section is for serach product using searchbar
     const { mutateAsync: searchResult, isLoading: searchLoading } = useMutateGetSearchResults((data: any) => {
         setListedData(data?.products)
     })
+    const debouncedSearchRef = useRef(debounce((term) => {
+        searchResult(term);
+    }, 300));
+    useEffect(() => {
+        if (searchTerm) {
+            debouncedSearchRef.current(searchTerm);
+        }
+    }, [searchTerm]);
 
+
+    // this section is to get the result using category dropdown
     const { mutateAsync: categoryResult, isLoading: categoryLoading } = useMutateGetCategoryResults((data: any) => {
-        console.log("first", data)
         setListedData(data?.products)
     })
-
-    useEffect(() => {
-        searchResult(searchTerm)
-    }, [searchTerm])
-
     useEffect(() => {
         categoryResult(category)
     }, [category])
+
 
     return (
         <>

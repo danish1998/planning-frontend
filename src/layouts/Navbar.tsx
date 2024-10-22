@@ -8,10 +8,10 @@ const Navbar = ({ searchTerm, onSearch }: any) => {
 
   const Navigate = useNavigate();
 
-  
+
   const [cart, setCart] = useRecoilState(cartState);
   return (
-    <div className='flex justify-between items-center h-[60px] bg-[#F4F9F9]'>
+    <div className='flex justify-between items-center shadow sticky top-0 z-10 h-[60px] bg-[#F4F9F9]'>
       <div
         onClick={() => Navigate('/Home')}
         className='flex-1 ml-[10px] font-bold text-[22px] cursor-pointer'
@@ -26,7 +26,6 @@ const Navbar = ({ searchTerm, onSearch }: any) => {
             className="border border-gray-300 rounded-l-md p-2 w-[100%] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
-            // onClick={handleSearch}
             className="bg-blue-500 text-white focus:outline-none rounded-r-md p-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Search

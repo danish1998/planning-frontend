@@ -22,7 +22,7 @@ const ProductsList = ({ productListing }: any) => {
 
                 {productListing?.length > 0 ? productListing?.map((product: any) => {
                     return (
-                        <div className=" border shadow-lg p-4 rounded-xl bg-[#F4F9F9] ">
+                        <div key={product.id} className=" border shadow-lg p-4 rounded-xl bg-[#F4F9F9] ">
                             <img
                                 src={product?.images[0] && product.images[0]}
                                 className='w-[450px] h-[300px] object-contain rounded-xl'

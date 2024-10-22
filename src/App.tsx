@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -9,8 +7,11 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Cart from './pages/Cart';
 import { Toaster } from 'react-hot-toast';
 
+
 function App() {
   const queryClient = new QueryClient();
+  const userData: any = localStorage.getItem('userData')
+  console.log("asdlkfjasdlfkj", userData)
   return (
     <>
       <Toaster />
@@ -20,13 +21,13 @@ function App() {
             <Route path='/' element={<Login />}></Route>
           </Routes>
           <Routes>
-            <Route path='/Register' element={<Register />}></Route>
+            <Route path='/Register' element={userData?.length > 0 ? <Register /> : <Login />}></Route>
           </Routes>
           <Routes>
-            <Route path='/Home' element={<Home />}></Route>
+            <Route path='/Home' element={userData?.length > 0 ? <Home /> : <Login />}></Route>
           </Routes>
           <Routes>
-            <Route path='/Cart' element={<Cart />}></Route>
+            <Route path='/Cart' element={userData?.length > 0 ? <Cart /> : <Login />}></Route>
           </Routes>
         </Router>
       </QueryClientProvider>

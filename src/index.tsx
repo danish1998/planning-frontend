@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +12,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-    <App />
+      <Auth0Provider
+        domain="dev-bar8jv54mhfmzqeb.us.auth0.com"
+        clientId="vSzLecQriPLVRlibl7P00RH4AgSnnXxi"
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}
+      >
+        <App />
+      </Auth0Provider>
     </RecoilRoot>
   </React.StrictMode>
 );
